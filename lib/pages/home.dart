@@ -13,15 +13,18 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   List<RekomendasiModel> rekomendasi = [];
+
+  @override
+  void initState() {
+    _getRekomendasi();
+  }
+
   void _getRekomendasi() {
-    setState(() {
-      rekomendasi = RekomendasiModel.getRekomendasi();
-    });
+    rekomendasi = RekomendasiModel.getRekomendasi();
   }
 
   @override
   Widget build(BuildContext context) {
-    _getRekomendasi();
     AppBar appbar = appBar();
     Scaffold scaffold = Scaffold(
       appBar: appbar,
