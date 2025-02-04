@@ -63,7 +63,6 @@ class _HomePageState extends State<HomePage> {
                   return Container(
                     width: 100,
                     decoration: BoxDecoration(
-                      color: const Color.fromARGB(21, 244, 29, 14),
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: Column(
@@ -97,6 +96,74 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
           ),
+          SizedBox(
+            height: 20,
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(14, 0, 0, 0),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Column(
+                  children: [
+                    Container(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.only(left: 20),
+                            child: Text(
+                              'FLASH SALE!!!',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ),
+                          Row(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(left: 18.0),
+                                child: Container(
+                                    width: 110,
+                                    height: 120,
+                                    decoration: BoxDecoration(
+                                        color: Colors.black,
+                                        borderRadius:
+                                            BorderRadius.circular(10))),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 10.0),
+                                child: Container(
+                                    width: 110,
+                                    height: 120,
+                                    decoration: BoxDecoration(
+                                        color: Colors.black,
+                                        borderRadius:
+                                            BorderRadius.circular(10))),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 10.0),
+                                child: Container(
+                                    width: 110,
+                                    height: 120,
+                                    decoration: BoxDecoration(
+                                        color: Colors.black,
+                                        borderRadius:
+                                            BorderRadius.circular(10))),
+                              )
+                            ],
+                          ),
+                        ],
+                      ),
+                      width: 385,
+                      height: 150,
+                      decoration: BoxDecoration(
+                          color: const Color.fromARGB(255, 96, 48, 48),
+                          borderRadius: BorderRadius.circular(10)),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
         ],
       ),
     );
@@ -109,7 +176,7 @@ class _HomePageState extends State<HomePage> {
       decoration: BoxDecoration(boxShadow: [
         BoxShadow(
             blurRadius: 15,
-            color: const Color.fromARGB(127, 66, 63, 63),
+            color: const Color.fromARGB(123, 92, 64, 64),
             spreadRadius: 0.0)
       ]),
       child: TextField(

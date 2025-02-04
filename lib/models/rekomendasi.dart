@@ -25,6 +25,10 @@ class RekomendasiModel {
         nama: 'Hiburan',
         icon: 'assets/icons/game.svg',
         deskripsi: 'Hobi & Hiburan'));
+    rekomendasi.add(RekomendasiModel(
+        nama: 'Furnitur',
+        icon: 'assets/icons/furnitur.svg',
+        deskripsi: 'Kebutuhan Rumah'));
     return rekomendasi;
   }
 }
