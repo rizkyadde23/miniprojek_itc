@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:projekitc1/models/flashSale.dart';
 import 'package:projekitc1/models/rekomendasi.dart';
 
 class HomePage extends StatefulWidget {
@@ -13,10 +14,16 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   List<RekomendasiModel> rekomendasi = [];
+  List<FlashSale> flashsale = [];
 
   @override
   void initState() {
     _getRekomendasi();
+    _getFlashSale();
+  }
+
+  void _getFlashSale() {
+    flashsale = FlashSale.getFlashSale();
   }
 
   void _getRekomendasi() {
@@ -101,12 +108,14 @@ class _HomePageState extends State<HomePage> {
           ),
           Padding(
             padding: const EdgeInsets.fromLTRB(14, 0, 0, 0),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Column(
+                Row(
                   children: [
                     Container(
+                      width: 385,
+                      height: 150,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -114,47 +123,39 @@ class _HomePageState extends State<HomePage> {
                             padding: const EdgeInsets.only(left: 20),
                             child: Text(
                               'FLASH SALE!!!',
-                              style: TextStyle(color: Colors.white),
+                              style: TextStyle(color: Colors.red),
                             ),
                           ),
-                          Row(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(left: 18.0),
-                                child: Container(
-                                    width: 110,
-                                    height: 120,
-                                    decoration: BoxDecoration(
-                                        color: Colors.black,
-                                        borderRadius:
-                                            BorderRadius.circular(10))),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(left: 10.0),
-                                child: Container(
-                                    width: 110,
-                                    height: 120,
-                                    decoration: BoxDecoration(
-                                        color: Colors.black,
-                                        borderRadius:
-                                            BorderRadius.circular(10))),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(left: 10.0),
-                                child: Container(
-                                    width: 110,
-                                    height: 120,
-                                    decoration: BoxDecoration(
-                                        color: Colors.black,
-                                        borderRadius:
-                                            BorderRadius.circular(10))),
-                              )
-                            ],
+                          Expanded(
+                            child: ListView.separated(
+                              scrollDirection: Axis.horizontal,
+                              itemCount: flashsale.length,
+                              separatorBuilder: (context, index) =>
+                                  SizedBox(width: 5),
+                              shrinkWrap: true,
+                              itemBuilder: (context, index) {
+                                return Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                      width: 100,
+                                      height: 100,
+                                      margin:
+                                          EdgeInsets.only(left: 18, right: 18),
+                                      child:
+                                          Image.asset(flashsale[index].images),
+                                    ),
+                                    Text(
+                                      flashsale[index].harga,
+                                      style: TextStyle(color: Colors.red),
+                                    ),
+                                  ],
+                                );
+                              },
+                            ),
                           ),
                         ],
                       ),
-                      width: 385,
-                      height: 150,
                       decoration: BoxDecoration(
                           color: const Color.fromARGB(255, 96, 48, 48),
                           borderRadius: BorderRadius.circular(10)),
