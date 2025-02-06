@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:projekitc1/models/barang.dart';
 import 'package:projekitc1/models/flashSale.dart';
 import 'package:projekitc1/models/rekomendasi.dart';
 
@@ -15,11 +16,17 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   List<RekomendasiModel> rekomendasi = [];
   List<FlashSale> flashsale = [];
+  List<Barang> barang = [];
 
   @override
   void initState() {
     _getRekomendasi();
     _getFlashSale();
+    _getBarang();
+  }
+
+  void _getBarang() {
+    barang = Barang.getBarang();
   }
 
   void _getFlashSale() {
@@ -114,13 +121,13 @@ class _HomePageState extends State<HomePage> {
                 Row(
                   children: [
                     Container(
+                      padding: EdgeInsets.only(right: 18, left: 18),
                       width: 385,
                       height: 150,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Container(
-                            padding: const EdgeInsets.only(left: 20),
                             child: Text(
                               'FLASH SALE!!!',
                               style: TextStyle(color: Colors.red),
@@ -136,12 +143,10 @@ class _HomePageState extends State<HomePage> {
                               itemBuilder: (context, index) {
                                 return Column(
                                   mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
+                                  children: <Widget>[
                                     Container(
                                       width: 100,
                                       height: 100,
-                                      margin:
-                                          EdgeInsets.only(left: 18, right: 18),
                                       child:
                                           Image.asset(flashsale[index].images),
                                     ),
@@ -157,7 +162,7 @@ class _HomePageState extends State<HomePage> {
                         ],
                       ),
                       decoration: BoxDecoration(
-                          color: const Color.fromARGB(255, 96, 48, 48),
+                          color: const Color.fromARGB(255, 89, 85, 85),
                           borderRadius: BorderRadius.circular(10)),
                     ),
                   ],
@@ -165,6 +170,39 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
           ),
+          SizedBox(
+            height: 20,
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 20),
+            child: Text(
+              'Barang-Barang Spesial Untukmu',
+            ),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.only(left: 20, right: 20),
+              child: GridView.builder(
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    mainAxisSpacing: 5,
+                    crossAxisSpacing: 5,
+                  ),
+                  itemCount: 10,
+                  itemBuilder: (contex, index) {
+                    return Container(
+                      decoration: BoxDecoration(
+                          color: Colors.black,
+                          borderRadius: BorderRadius.circular(10)),
+                      width: 175,
+                      height: 200,
+                    );
+                  }),
+            ),
+          )
         ],
       ),
     );
