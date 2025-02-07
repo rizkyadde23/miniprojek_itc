@@ -20,7 +20,8 @@ flutter:
   uses-material-design: true
   assets:
     - assets/icons/
-    - assets/images/
+    - assets/images/flashsale/
+    - assets/images/barang/
   fonts:
     - family: fancy
       fonts:

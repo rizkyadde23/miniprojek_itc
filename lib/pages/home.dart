@@ -64,51 +64,7 @@ class _HomePageState extends State<HomePage> {
           ),
           GestureDetector(
             onTap: () {},
-            child: Container(
-              height: 120,
-              child: ListView.separated(
-                separatorBuilder: (context, index) => SizedBox(
-                  width: 20,
-                ),
-                itemCount: rekomendasi.length,
-                scrollDirection: Axis.horizontal,
-                padding: EdgeInsets.only(left: 20, right: 20),
-                itemBuilder: (context, index) {
-                  return Container(
-                    width: 100,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Container(
-                          child: SvgPicture.asset(rekomendasi[index].icon),
-                          height: 70,
-                          width: 100,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(20),
-                                topRight: Radius.circular(20)),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(4.0),
-                          child: Text(
-                            rekomendasi[index].nama,
-                            style: TextStyle(fontSize: 12),
-                          ),
-                        ),
-                        Text(
-                          rekomendasi[index].deskripsi,
-                          style: TextStyle(fontSize: 8),
-                        ),
-                      ],
-                    ),
-                  );
-                },
-              ),
-            ),
+            child: rekomendasiBarang(),
           ),
           SizedBox(
             height: 20,
@@ -118,55 +74,7 @@ class _HomePageState extends State<HomePage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Row(
-                  children: [
-                    Container(
-                      padding: EdgeInsets.only(right: 18, left: 18),
-                      width: 385,
-                      height: 150,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                            child: Text(
-                              'FLASH SALE!!!',
-                              style: TextStyle(color: Colors.red),
-                            ),
-                          ),
-                          Expanded(
-                            child: ListView.separated(
-                              scrollDirection: Axis.horizontal,
-                              itemCount: flashsale.length,
-                              separatorBuilder: (context, index) =>
-                                  SizedBox(width: 5),
-                              shrinkWrap: true,
-                              itemBuilder: (context, index) {
-                                return Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: <Widget>[
-                                    Container(
-                                      width: 100,
-                                      height: 100,
-                                      child:
-                                          Image.asset(flashsale[index].images),
-                                    ),
-                                    Text(
-                                      flashsale[index].harga,
-                                      style: TextStyle(color: Colors.red),
-                                    ),
-                                  ],
-                                );
-                              },
-                            ),
-                          ),
-                        ],
-                      ),
-                      decoration: BoxDecoration(
-                          color: const Color.fromARGB(255, 89, 85, 85),
-                          borderRadius: BorderRadius.circular(10)),
-                    ),
-                  ],
-                ),
+                flashSale(),
               ],
             ),
           ),
@@ -188,17 +96,73 @@ class _HomePageState extends State<HomePage> {
               child: GridView.builder(
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
-                    mainAxisSpacing: 5,
-                    crossAxisSpacing: 5,
+                    mainAxisSpacing: 10,
+                    crossAxisSpacing: 10,
+                    childAspectRatio: 0.75,
                   ),
-                  itemCount: 10,
+                  itemCount: barang.length,
                   itemBuilder: (contex, index) {
                     return Container(
+                      margin: EdgeInsets.all(2),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            width: 185,
+                            height: 150,
+                            clipBehavior: Clip.hardEdge,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(10),
+                                    topRight: Radius.circular(10))),
+                            child: Image.asset(
+                              barang[index].images,
+                              fit: BoxFit.fill,
+                            ),
+                          ),
+                          Padding(
+                              padding:
+                                  const EdgeInsets.only(left: 14.0, right: 14),
+                              child: Container(
+                                  width: 185,
+                                  height: 85,
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        barang[index].nama,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                      Text(
+                                        barang[index].harga,
+                                        style: TextStyle(fontSize: 11),
+                                      ),
+                                      Text(
+                                        barang[index].rating,
+                                        style: TextStyle(fontSize: 11),
+                                      ),
+                                      Text(
+                                        barang[index].terjual,
+                                        style: TextStyle(fontSize: 11),
+                                      ),
+                                      Text(
+                                        barang[index].lokasi,
+                                        style: TextStyle(fontSize: 11),
+                                      ),
+                                    ],
+                                  ))),
+                        ],
+                      ),
                       decoration: BoxDecoration(
-                          color: Colors.black,
-                          borderRadius: BorderRadius.circular(10)),
-                      width: 175,
-                      height: 200,
+                          color: const Color.fromARGB(255, 186, 182, 182),
+                          borderRadius: BorderRadius.circular(10),
+                          boxShadow: <BoxShadow>[
+                            BoxShadow(
+                                spreadRadius: 0.0,
+                                blurRadius: 2,
+                                color: const Color.fromARGB(255, 255, 0, 0))
+                          ]),
                     );
                   }),
             ),
@@ -207,6 +171,110 @@ class _HomePageState extends State<HomePage> {
       ),
     );
     return scaffold;
+  }
+
+  Row flashSale() {
+    return Row(
+      children: [
+        Container(
+          padding: EdgeInsets.only(right: 18, left: 18),
+          width: 385,
+          height: 150,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                child: Text(
+                  'FLASH SALE!!!',
+                  style: TextStyle(color: Colors.red),
+                ),
+              ),
+              Expanded(
+                child: ListView.separated(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: flashsale.length,
+                  separatorBuilder: (context, index) => SizedBox(width: 5),
+                  shrinkWrap: true,
+                  itemBuilder: (context, index) {
+                    return Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: <Widget>[
+                        Container(
+                          width: 100,
+                          height: 100,
+                          clipBehavior: Clip.hardEdge,
+                          child: Image.asset(
+                            flashsale[index].images,
+                            fit: BoxFit.cover,
+                          ),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10)),
+                        ),
+                        Text(
+                          flashsale[index].harga,
+                          style: TextStyle(color: Colors.red),
+                        ),
+                      ],
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
+          decoration: BoxDecoration(
+              color: const Color.fromARGB(255, 89, 85, 85),
+              borderRadius: BorderRadius.circular(10)),
+        ),
+      ],
+    );
+  }
+
+  Container rekomendasiBarang() {
+    return Container(
+      height: 120,
+      child: ListView.separated(
+        separatorBuilder: (context, index) => SizedBox(
+          width: 20,
+        ),
+        itemCount: rekomendasi.length,
+        scrollDirection: Axis.horizontal,
+        padding: EdgeInsets.only(left: 20, right: 20),
+        itemBuilder: (context, index) {
+          return Container(
+            width: 100,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Container(
+                  child: SvgPicture.asset(rekomendasi[index].icon),
+                  height: 70,
+                  width: 100,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(20),
+                        topRight: Radius.circular(20)),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(4.0),
+                  child: Text(
+                    rekomendasi[index].nama,
+                    style: TextStyle(fontSize: 12),
+                  ),
+                ),
+                Text(
+                  rekomendasi[index].deskripsi,
+                  style: TextStyle(fontSize: 8),
+                ),
+              ],
+            ),
+          );
+        },
+      ),
+    );
   }
 
   Container searchBar() {
@@ -248,7 +316,7 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       centerTitle: true,
-      backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+      backgroundColor: const Color.fromARGB(255, 79, 79, 79),
       elevation: 0.0,
       leading: GestureDetector(
         onTap: () {},
