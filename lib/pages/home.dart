@@ -90,87 +90,96 @@ class _HomePageState extends State<HomePage> {
           SizedBox(
             height: 10,
           ),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.only(left: 20, right: 20),
-              child: GridView.builder(
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    mainAxisSpacing: 10,
-                    crossAxisSpacing: 10,
-                    childAspectRatio: 0.75,
-                  ),
-                  itemCount: barang.length,
-                  itemBuilder: (contex, index) {
-                    return Container(
-                      margin: EdgeInsets.all(2),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                            width: 185,
-                            height: 150,
-                            clipBehavior: Clip.hardEdge,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(10),
-                                    topRight: Radius.circular(10))),
-                            child: Image.asset(
-                              barang[index].images,
-                              fit: BoxFit.fill,
-                            ),
-                          ),
-                          Padding(
-                              padding:
-                                  const EdgeInsets.only(left: 14.0, right: 14),
-                              child: Container(
-                                  width: 185,
-                                  height: 85,
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        barang[index].nama,
-                                        overflow: TextOverflow.ellipsis,
-                                      ),
-                                      Text(
-                                        barang[index].harga,
-                                        style: TextStyle(fontSize: 11),
-                                      ),
-                                      Text(
-                                        barang[index].rating,
-                                        style: TextStyle(fontSize: 11),
-                                      ),
-                                      Text(
-                                        barang[index].terjual,
-                                        style: TextStyle(fontSize: 11),
-                                      ),
-                                      Text(
-                                        barang[index].lokasi,
-                                        style: TextStyle(fontSize: 11),
-                                      ),
-                                    ],
-                                  ))),
-                        ],
-                      ),
-                      decoration: BoxDecoration(
-                          color: const Color.fromARGB(255, 186, 182, 182),
-                          borderRadius: BorderRadius.circular(10),
-                          boxShadow: <BoxShadow>[
-                            BoxShadow(
-                                spreadRadius: 0.0,
-                                blurRadius: 2,
-                                color: const Color.fromARGB(255, 255, 0, 0))
-                          ]),
-                    );
-                  }),
-            ),
-          )
+          forYou(),
         ],
       ),
     );
     return scaffold;
+  }
+
+  Expanded forYou() {
+    return Expanded(
+      child: Padding(
+        padding: const EdgeInsets.only(left: 20, right: 20),
+        child: GridView.builder(
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              mainAxisSpacing: 10,
+              crossAxisSpacing: 10,
+              childAspectRatio: 0.65,
+            ),
+            itemCount: barang.length,
+            itemBuilder: (contex, index) {
+              return Container(
+                margin: const EdgeInsets.all(2),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      clipBehavior: Clip.hardEdge,
+                      decoration: BoxDecoration(
+                          borderRadius: const BorderRadius.only(
+                              topLeft: Radius.circular(10),
+                              topRight: Radius.circular(10))),
+                      child: Image.asset(
+                        barang[index].images,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    Container(
+                        height: 95,
+                        margin: const EdgeInsets.fromLTRB(14, 0, 14, 0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            // Flexible(child: Text('data')),
+                            Flexible(
+                              child: Text(
+                                barang[index].nama,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                            Flexible(
+                              child: Text(
+                                barang[index].harga,
+                                style: TextStyle(fontSize: 11),
+                              ),
+                            ),
+                            Flexible(
+                              child: Text(
+                                barang[index].rating,
+                                style: TextStyle(fontSize: 11),
+                              ),
+                            ),
+                            Flexible(
+                              child: Text(
+                                barang[index].terjual,
+                                style: TextStyle(fontSize: 11),
+                              ),
+                            ),
+                            Flexible(
+                              child: Text(
+                                barang[index].lokasi,
+                                style: TextStyle(fontSize: 11),
+                              ),
+                            ),
+                          ],
+                        )),
+                  ],
+                ),
+                decoration: BoxDecoration(
+                    color: const Color.fromARGB(255, 186, 182, 182),
+                    borderRadius: BorderRadius.circular(10),
+                    boxShadow: <BoxShadow>[
+                      BoxShadow(
+                          spreadRadius: 0.0,
+                          blurRadius: 2,
+                          color: const Color.fromARGB(255, 255, 0, 0))
+                    ]),
+              );
+            }),
+      ),
+    );
   }
 
   Row flashSale() {
